@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+{% block title %}Login{% endblock title %}
+{% block main %}
+<section class="container">
+    <div class="row justify-content-around mt-5">
+        <div class="col-md-5">
+            <h3 class="text-white">Login Form</h3>
+        </div>
+    </div>
+    <div class="row justify-content-around" >
+        <div class="col-md-5">
+            <form action="" method="post" class="bg-white my-3 p-2">
+            {% csrf_token %}
+                {% comment %} {% for fm in form %}
+                {{fm.label_tag}}
+                {{fm}}
+                    {% if fm.errors %}
+                        {% for i in fm  %}
+                            {% for error in i.errors  %}
+                                <div class="alert alert-danger">
+                                    {{i.label_tag}}
+                                    {{i}}
+                                    <strong>{{error|escape}}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %} {% endcomment %}
+              
+                {% if form.errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+                {% endif %}
+              
+                {{ form.username.errors }} {{ form.username.label_tag }} {{ form.username }}
+                {{ form.password.errors }} {{ form.password.label_tag }} {{ form.password }} 
+                
+            
+                <input type="submit" value="Login" class="btn btn-primary mt-3">
+            </form>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock main %}

@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% block title %}SignUp{% endblock title %}
+
+{% block main %}
+<div class ="container">
+    <div class="row justify-content-around mt-5">
+        <div class="col-sm-6">
+        <h3>SignUp Form</h3>
+        </div>
+    </div>
+    <div class="row my-3 justify-content-around">
+        <div class="col-sm-6">
+            <form action="" method="post" class='bg-white p-3 rounded'>
+            {% comment %} {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endfor %}
+            {% endif %} {% endcomment %}
+            {% csrf_token %}
+                {% comment %} {{% for fm in form  %}
+                    {{fm.label_tag}}
+                    {{fm}}
+                    <small>{{fm.error|striptags}}</small>
+                {% endfor %}}
+                {% for i in form.errors  %}
+                {{i}}
+                {% endfor %}
+                {% if form.errors %}
+                error!
+                {% endif %} {% endcomment %}
+                {% if form.errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+                {% endif %}
+                {{ form.username.errors }}{{ form.username.label_tag }}  {{ form.username }}
+                {{ form.email.errors }}{{ form.email.label_tag }}   {{ form.email }}
+                {{ form.password1.errors }} {{ form.password1.label_tag }}  {{ form.password1 }}
+                {{ form.password2.errors }}{{ form.password2.label_tag }}   {{ form.password2 }}
+             
+               
+                <input type="submit" value="Submit" class= 'btn btn-primary my-2' >
+            </form>
+        </div>
+
+
+    </div>
+</div>
+{% endblock main %}
